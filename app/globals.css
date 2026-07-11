@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: #f7f4ec;
+  --sand: #d8c8a8;
+  --charcoal: #111111;
+  --muted: #77736b;
+  --olive: #5f6f45;
+  --earth: #8a6542;
+}
+
+html,
+body {
+  background-color: var(--cream);
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--sand);
+  color: var(--charcoal);
+}
+
+@layer components {
+  /* ui.md rule 2: width min(90%, 1440px), centered. */
+  .container-page {
+    width: min(90%, 1440px);
+    margin-inline: auto;
+  }
+
+  /* ui.md rule 4: fluid section rhythm, 48 → 120px. */
+  .section-y {
+    padding-top: clamp(3rem, 8vw, 7.5rem);
+    padding-bottom: clamp(3rem, 8vw, 7.5rem);
+  }
+
+  /* ui.md rule 3: paragraph copy never exceeds 720px / 65ch. */
+  .prose-max {
+    max-width: min(65ch, 720px);
+  }
+
+  .btn-luxury {
+    @apply inline-flex items-center gap-3 border border-charcoal px-8 py-4 text-sm uppercase tracking-[0.22em] text-charcoal transition-all duration-500 hover:bg-charcoal hover:text-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-charcoal;
+  }
+
+  .btn-luxury-inverse {
+    @apply inline-flex items-center gap-3 border border-cream px-8 py-4 text-sm uppercase tracking-[0.22em] text-cream transition-all duration-500 hover:bg-cream hover:text-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream;
+  }
+
+  /* Filled primary — used on bright hero images where an outline button would wash out. */
+  .btn-hero-primary {
+    @apply inline-flex items-center gap-3 bg-cream px-8 py-4 text-sm uppercase tracking-[0.22em] text-charcoal shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition-all duration-500 hover:bg-charcoal hover:text-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream;
+  }
+
+  /* Secondary hero — outline over a subtle wash so it stays legible on any hero. */
+  .btn-hero-secondary {
+    @apply inline-flex items-center gap-3 border border-cream bg-black/20 px-8 py-4 text-sm uppercase tracking-[0.22em] text-cream backdrop-blur-sm transition-all duration-500 hover:bg-cream hover:text-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream;
+  }
+
+  .eyebrow {
+    @apply text-[11px] uppercase tracking-[0.32em] text-muted;
+  }
+
+  .rule {
+    @apply block h-px w-12 bg-charcoal/30;
+  }
+
+  .link-underline {
+    @apply relative inline-block after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-500 hover:after:origin-left hover:after:scale-x-100 focus-visible:outline-none focus-visible:after:origin-left focus-visible:after:scale-x-100;
+  }
+
+  .input-luxury {
+    @apply w-full border-0 border-b border-charcoal/30 bg-transparent py-4 text-body text-charcoal placeholder:text-muted focus:border-charcoal focus:outline-none focus:ring-0 focus-visible:border-charcoal;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(17, 17, 17, 0.15);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(17, 17, 17, 0.3);
+}
+
+/* Accessibility exemption to ui.md rule 10 — the only sanctioned !important use. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
